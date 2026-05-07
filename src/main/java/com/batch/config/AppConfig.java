@@ -27,8 +27,8 @@ public class AppConfig {
     }
 
     public Connection obtenirConnexion() throws SQLException {
-        String url      = proprietes.getProperty("db.url");
-        String user     = proprietes.getProperty("db.username");
+        String url = proprietes.getProperty("db.url");
+        String user = proprietes.getProperty("db.username");
         String password = proprietes.getProperty("db.password");
         return DriverManager.getConnection(url, user, password);
     }
