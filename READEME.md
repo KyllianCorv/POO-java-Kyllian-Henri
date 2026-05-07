@@ -6,10 +6,4 @@ test : mvn test
 
 
 Info avancement : 
-Kyllian : Normalement j'ai poussé le code qu'on à fais le weekend dernier ensemble
-
-Il reste à faire : 
-Partie 4 — DAO (insert/update en BDD via JDBC)
-Partie 5 — FolderWatcher (surveillance du dossier, orchestration, déplacement des fichiers)
-Partie 6 — Main complet + README
-Partie 7 — Interface graphique
+Kyllian : Normalement j'ai poussé le code qu'on a fait le weekend dernier ensemble
