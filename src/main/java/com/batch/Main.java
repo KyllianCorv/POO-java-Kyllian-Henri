@@ -9,10 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
         log.info("=== CSV Batch Processor - Démarrage ===");
-        // TODO : initialiser la configuration
-        // TODO : initialiser le repository
-        // TODO : initialiser le service batch
-        // TODO : démarrer le watcher de fichiers
         log.info("Application démarrée.");
     }
 }
