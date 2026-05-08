@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.batch.model.RemboursementTest" time="0.008" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.batch.watcher.FolderWatcherTest" time="0.545" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,6 +58,18 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="setters_modifientLesValeurs" classname="com.batch.model.RemboursementTest" time="0.002"/>
-  <testcase name="constructeurComplet_renseigneTousLesChamps" classname="com.batch.model.RemboursementTest" time="0.0"/>
+  <testcase name="traiterDossier_deplaceFichierDansTraite" classname="com.batch.watcher.FolderWatcherTest" time="0.494">
+    <system-out><![CDATA[2026-05-08 11:46:28.546 [main] INFO  com.batch.watcher.FolderWatcher - Traitement de users_20260501000000.csv
+2026-05-08 11:46:28.558 [main] INFO  com.batch.watcher.FolderWatcher - users_20260501000000.csv traité avec succès (1 lignes)
+]]></system-out>
+  </testcase>
+  <testcase name="traiterDossier_fichierInvalide_deplaceDansErreur" classname="com.batch.watcher.FolderWatcherTest" time="0.023">
+    <system-out><![CDATA[2026-05-08 11:46:28.580 [main] INFO  com.batch.watcher.FolderWatcher - Traitement de users_20260501000000.csv
+2026-05-08 11:46:28.583 [main] ERROR com.batch.watcher.FolderWatcher - Erreur lors du traitement de users_20260501000000.csv : Index 6 out of bounds for length 1
+]]></system-out>
+  </testcase>
+  <testcase name="traiterDossier_ignoreFichiersNonConformes" classname="com.batch.watcher.FolderWatcherTest" time="0.017">
+    <system-out><![CDATA[2026-05-08 11:46:28.604 [main] INFO  com.batch.watcher.FolderWatcher - Aucun fichier à traiter dans C:\Users\KYLLIA~1\AppData\Local\Temp\junit-7299455613331405837\input
+]]></system-out>
+  </testcase>
 </testsuite>
