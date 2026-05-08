@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.batch.parser.CsvParserTest" time="0.149" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.batch.dao.RemboursementDaoTest" time="1.755" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,8 +58,16 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="extraireTimestamp_retourneLeBonTimestamp" classname="com.batch.parser.CsvParserTest" time="0.024"/>
-  <testcase name="parser_fichierVide_retourneListeVide(Path)" classname="com.batch.parser.CsvParserTest" time="0.096"/>
-  <testcase name="extraireTimestamp_avecCheminWindows" classname="com.batch.parser.CsvParserTest" time="0.004"/>
-  <testcase name="parser_retourneLaBonneListe(Path)" classname="com.batch.parser.CsvParserTest" time="0.011"/>
+  <testcase name="sauvegarder_metAJourQuandDejaPresente" classname="com.batch.dao.RemboursementDaoTest" time="1.684">
+    <system-out><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+]]></system-out>
+    <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\Kyllian CORVAISIER\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.3\byte-buddy-agent-1.15.3.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+  </testcase>
+  <testcase name="sauvegarder_insereLigneQuandAbsente" classname="com.batch.dao.RemboursementDaoTest" time="0.019"/>
+  <testcase name="sauvegarder_deuxLignesDifferentes" classname="com.batch.dao.RemboursementDaoTest" time="0.009"/>
 </testsuite>
