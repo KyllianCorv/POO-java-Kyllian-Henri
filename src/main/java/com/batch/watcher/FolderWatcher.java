@@ -38,7 +38,7 @@ public class FolderWatcher {
         List<Path> fichiers = listerFichiersCsv(dossierEntree);
 
         if (fichiers.isEmpty()) {
-            log.info("Aucun fichier à traiter dans {}", dossierEntree);
+            log.info("Aucun fichier a traiter dans {}", dossierEntree);
             return;
         }
 
@@ -55,7 +55,7 @@ public class FolderWatcher {
                 dao.sauvegarder(r);
             }
             deplacer(fichier, dossierTraite);
-            log.info("{} traité avec succès ({} lignes)", fichier.getFileName(), remboursements.size());
+            log.info("{} traite avec succes ({} lignes)", fichier.getFileName(), remboursements.size());
         } catch (Exception e) {
             log.error("Erreur lors du traitement de {} : {}", fichier.getFileName(), e.getMessage());
             deplacer(fichier, dossierErreur);
@@ -78,7 +78,7 @@ public class FolderWatcher {
         try {
             Files.move(fichier, destination.resolve(fichier.getFileName()), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            log.error("Impossible de déplacer {} vers {} : {}", fichier.getFileName(), destination, e.getMessage());
+            log.error("Impossible de deplacer {} vers {} : {}", fichier.getFileName(), destination, e.getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ public class FolderWatcher {
         try {
             Files.createDirectories(dossier);
         } catch (IOException e) {
-            throw new RuntimeException("Impossible de créer le dossier " + dossier, e);
+            throw new RuntimeException("Impossible de creer le dossier " + dossier, e);
         }
     }
 }
