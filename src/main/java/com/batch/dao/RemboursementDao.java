@@ -4,6 +4,8 @@ import com.batch.config.AppConfig;
 import com.batch.model.Remboursement;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RemboursementDao {
 
@@ -69,5 +71,37 @@ public class RemboursementDao {
         ps.setString(8, r.getCodeSoin());
         ps.setBigDecimal(9, r.getMontantRemboursement());
         ps.setTimestamp(10, Timestamp.valueOf(r.getTimestampFichier()));
+    }
+
+    public List<Remboursement> listerTous() throws SQLException {
+        List<Remboursement> remboursements = new ArrayList<>();
+
+        String sql = "SELECT id_remboursement, numero_secu, nom, prenom, date_naissance, " +
+                "numero_telephone, email, code_soin, montant_remboursement, timestamp_fichier " +
+                "FROM remboursement";
+
+        try (Connection conn = config.obtenirConnexion();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Remboursement r = new Remboursement();
+
+                r.setIdRemboursement(rs.getString("id_remboursement"));
+                r.setNumeroSecu(rs.getString("numero_secu"));
+                r.setNom(rs.getString("nom"));
+                r.setPrenom(rs.getString("prenom"));
+                r.setDateNaissance(rs.getDate("date_naissance").toLocalDate());
+                r.setNumeroTelephone(rs.getString("numero_telephone"));
+                r.setEmail(rs.getString("email"));
+                r.setCodeSoin(rs.getString("code_soin"));
+                r.setMontantRemboursement(rs.getBigDecimal("montant_remboursement"));
+                r.setTimestampFichier(rs.getTimestamp("timestamp_fichier").toLocalDateTime());
+
+                remboursements.add(r);
+            }
+        }
+
+        return remboursements;
     }
 }

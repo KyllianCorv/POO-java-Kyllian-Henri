@@ -1,26 +1,73 @@
 package com.batch;
 
-import com.batch.config.AppConfig;
-import com.batch.watcher.FolderWatcher;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javafx.application.Application;
+import javafx.concurrent.Worker;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import netscape.javascript.JSObject;
 
-public class Main {
+public class Main extends Application {
 
-    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    @Override
+    public void start(Stage stage) {
+
+        //
+        // WebView
+        //
+
+        WebView webView = new WebView();
+
+        //
+        // Engine HTML
+        //
+
+        WebEngine engine = webView.getEngine();
+
+        //
+        // Chargement du frontend
+        //
+
+        String url = getClass()
+                .getResource("/web/index.html")
+                .toExternalForm();
+
+        engine.load(url);
+
+        //
+        // Exposition Java -> JavaScript
+        //
+
+        engine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
+
+            if (newState == Worker.State.SUCCEEDED) {
+
+                JSObject window =
+                        (JSObject) engine.executeScript("window");
+
+                window.setMember(
+                        "javaBackend",
+                        new BackendBridge(engine)
+                );
+            }
+        });
+
+        //
+        // Fenêtre
+        //
+
+        Scene scene =
+                new Scene(webView, 1100, 700);
+
+        stage.setTitle("CSV Batch Processor");
+
+        stage.setScene(scene);
+
+        stage.show();
+    }
 
     public static void main(String[] args) {
-        log.info("=== CSV Batch Processor - Demarrage ===");
-
-        try {
-            AppConfig config = new AppConfig();
-            FolderWatcher watcher = new FolderWatcher(config);
-            watcher.traiterDossier();
-        } catch (Exception e) {
-            log.error("Erreur critique : {}", e.getMessage(), e);
-            System.exit(1);
-        }
-
-        log.info("=== CSV Batch Processor - Termine ===");
+        launch();
     }
 }

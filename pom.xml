@@ -2,35 +2,59 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.batch</groupId>
     <artifactId>csv-batch-processor</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
+
     <name>CSV Batch Processor</name>
-    <description>Batch de traitement de fichiers CSV avec persistance PostgreSQL</description>
+
+    <description>
+        Batch de traitement de fichiers CSV avec interface HTML/CSS
+        embarquée en JavaFX WebView
+    </description>
 
     <properties>
+
+        <!-- JAVA -->
         <java.version>21</java.version>
+
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.release>${java.version}</maven.compiler.release>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <!-- JAVA FX -->
+        <javafx.version>21.0.2</javafx.version>
+
+        <!-- DATABASE -->
         <postgresql.version>42.7.4</postgresql.version>
+
+        <!-- CSV -->
         <commons-csv.version>1.11.0</commons-csv.version>
+
+        <!-- LOGGING -->
         <slf4j.version>2.0.16</slf4j.version>
         <logback.version>1.5.12</logback.version>
+
+        <!-- TEST -->
         <junit.version>5.11.3</junit.version>
         <mockito.version>5.14.1</mockito.version>
         <h2.version>2.3.232</h2.version>
+
+        <!-- TOOLS -->
         <lombok.version>1.18.34</lombok.version>
+
     </properties>
 
     <dependencies>
 
+        <!-- LOMBOK -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -38,18 +62,21 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- POSTGRESQL -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
         </dependency>
 
+        <!-- CSV -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-csv</artifactId>
             <version>${commons-csv.version}</version>
         </dependency>
 
+        <!-- LOGGING -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -62,6 +89,20 @@
             <version>${logback.version}</version>
         </dependency>
 
+        <!-- JAVAFX -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <!-- TEST -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -86,53 +127,90 @@
     </dependencies>
 
     <build>
+
         <plugins>
 
+            <!-- COMPILATEUR JAVA -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
+
                 <configuration>
                     <release>${java.version}</release>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
 
+            <!-- TESTS -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.1</version>
+
                 <configuration>
-                    <argLine>-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8</argLine>
+                    <argLine>
+                        -Dfile.encoding=UTF-8
+                        -Dstdout.encoding=UTF-8
+                    </argLine>
                 </configuration>
             </plugin>
 
+            <!-- JAVAFX -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+
+                <configuration>
+                    <mainClass>com.batch.Main</mainClass>
+                </configuration>
+            </plugin>
+
+            <!-- JAR EXECUTABLE -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.7.1</version>
+
                 <configuration>
+
                     <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                        <descriptorRef>
+                            jar-with-dependencies
+                        </descriptorRef>
                     </descriptorRefs>
+
                     <archive>
                         <manifest>
                             <mainClass>com.batch.Main</mainClass>
                         </manifest>
                     </archive>
-                    <finalName>${project.artifactId}-${project.version}</finalName>
+
+                    <finalName>
+                        ${project.artifactId}-${project.version}
+                    </finalName>
+
                 </configuration>
+
                 <executions>
+
                     <execution>
                         <id>make-assembly</id>
+
                         <phase>package</phase>
+
                         <goals>
                             <goal>single</goal>
                         </goals>
                     </execution>
+
                 </executions>
+
             </plugin>
 
         </plugins>
+
     </build>
+
 </project>

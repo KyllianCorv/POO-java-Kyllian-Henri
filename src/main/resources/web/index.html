@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Batch Processor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="logo">
+            CSV Batch Processor
+        </div>
+
+        <div class="nav-links">
+            <button class="nav-button active" onclick="showPage('upload-page', this)">
+                Ajout de fichier
+            </button>
+
+            <button class="nav-button" onclick="showPage('database-page', this)">
+                Visualisation des saisies
+            </button>
+        </div>
+        <div class="status-card">
+            <h3>Status</h3>
+            <p id="status-message">En attente d'une action...</p>
+        </div>
+    </nav>
+
+    <!-- PAGE 1 -->
+    <section id="upload-page" class="page active-page">
+
+        <div class="toolbar">
+            <button class="action-button" onclick="addFile()">+</button>
+            <button class="action-button" onclick="refreshFiles()">Refresh</button>
+            <button class="process-button" onclick="launchCsvProcessing()">
+                Lancer le traitement CSV
+            </button>
+        </div>
+
+        <div class="columns-container">
+
+            <div class="column">
+                <div class="column-header input-header">INPUT</div>
+                <ul id="input-files" class="file-list"></ul>
+            </div>
+
+            <div class="column">
+                <div class="column-header processed-header">PROCESSED</div>
+                <ul id="processed-files" class="file-list"></ul>
+            </div>
+
+            <div class="column">
+                <div class="column-header error-header">ERRORS</div>
+                <ul id="error-files" class="file-list"></ul>
+            </div>
+
+        </div>
+
+        <div class="loader-section">
+            <div class="loader" id="loader"></div>
+            <div class="loader-text">
+                <span id="progress-status">En attente...</span>
+            </div>
+        </div>
+
+
+
+    </section>
+
+    <!-- PAGE 2 -->
+    <section id="database-page" class="page">
+
+        <div class="table-card">
+
+            <div class="table-header">
+                <h2>Visualisation des saisies</h2>
+
+                <button class="action-button" onclick="loadDatabaseData()">
+                    Refresh
+                </button>
+            </div>
+
+            <!-- WRAPPER SCROLL HORIZONTAL -->
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>id de Remboursement</th>
+                        <th>numero de Securité sociale</th>
+                        <th>nom</th>
+                        <th>prenom</th>
+                        <th>date de Naissance</th>
+                        <th>numero de Telephone</th>
+                        <th>email</th>
+                        <th>code de Soin</th>
+                        <th>montant du Remboursement</th>
+                        <th>timestamp du Fichier</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="database-content"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="app.js">refreshFiles();</script>
+
+</body>
+
+</html>
